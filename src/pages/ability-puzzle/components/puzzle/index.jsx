@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { randomDataFunc } from '../../../../helpers'
 import Finish from '../finish';
+import { toast } from 'react-hot-toast';
 
 const Puzzle = ({ question, selectedDifficultyiOption }) => {
 
@@ -46,12 +47,14 @@ const Puzzle = ({ question, selectedDifficultyiOption }) => {
             if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
                 if (visibilityQuestion == 9) {
                     setEnd(true)
+                    toast.success('Doğru!')
                 } else {
                     setVisibilityQuestion(visibilityQuestion + 1)
+                    toast.success('Doğru!')
                 }
                 setTrueAnswer(trueAnswer + 1)
                 setTrueModal(true)
-                alert("doğru cevap!!!")
+                toast.success('Doğru!')
             } else {
                 if (visibilityQuestion == 9) {
                     setEnd(true)
@@ -59,7 +62,7 @@ const Puzzle = ({ question, selectedDifficultyiOption }) => {
                     setVisibilityQuestion(visibilityQuestion + 1)
                 }
                 setFalseAnswer(falseAnswer + 1)
-                alert("yanlış cevap!!!")
+                toast.error('Yanlış!')
             }
         }
 
@@ -90,7 +93,6 @@ const Puzzle = ({ question, selectedDifficultyiOption }) => {
 
     function QuestionRender() {
 
-
         const handleNextClick = () => {
             if (visibilityQuestion < 9)
                 setVisibilityQuestion(visibilityQuestion + 1)
@@ -104,7 +106,6 @@ const Puzzle = ({ question, selectedDifficultyiOption }) => {
             setEnd(true)
         };
 
-        console.log(questionData.length)
         return (
             <div>
                 {
@@ -130,10 +131,6 @@ const Puzzle = ({ question, selectedDifficultyiOption }) => {
         )
     }
 
-    function handleApproval() {
-
-    }
-
     return (
         <>
 
@@ -143,27 +140,14 @@ const Puzzle = ({ question, selectedDifficultyiOption }) => {
                     <QuestionRender />
                 </div>
             )}
-            {/* {
-                trueModal && (
-                    <div className='top-0 left-0 position-fixed d-flex flex-column align-items-center justify-content-center p-5' style={{ zIndex: 9999, width: "100vw", height: "100vh", background: "rgba(0,0,0,.5" }}>
-                        <div className='p-5 rounded' style={{ background: "#212529", border: "1px solid rgba(255, 255, 255, 0.15)", width: "100%", maxWidth: 500, minHeight: 200 }}>
-                            <div><h3 className='text-center'>Doğru cevap!</h3></div>
-                            <button onClick={() => handleApproval()} className='btn btn-outline-success d-block w-100 mt-5'>Sonraki</button>
-                        </div>
+            <div className="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+                <div className="d-flex">
+                    <div className="toast-body">
+                        Hello, world! This is a toast message.
                     </div>
-                )
-            }
-            {
-                falseModal && (
-                    <div className='top-0 left-0 position-fixed d-flex flex-column align-items-center justify-content-center p-5' style={{ zIndex: 9999, width: "100vw", height: "100vh", background: "rgba(0,0,0,.5" }}>
-                        <div className='p-5 rounded' style={{ background: "#212529", border: "1px solid rgba(255, 255, 255, 0.15)", width: "100%", maxWidth: 500, minHeight: 200 }}>
-                            <div><h3 className='text-center'>Yanlış cevap!</h3></div>
-                            <button onClick={() => handleApproval()} className='btn btn-outline-success d-block w-100 mt-5'>Sonraki</button>
-                        </div>
-                    </div>
-                )
-            } */}
-
+                    <button type="button" className="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
         </>
     )
 }
