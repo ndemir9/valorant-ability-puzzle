@@ -1,0 +1,6 @@
+.characterSearchItem:hover {
+    border-color: #198754 !important;
+    background-color: #198754;
+    color: white !important;
+    cursor: pointer;
+}

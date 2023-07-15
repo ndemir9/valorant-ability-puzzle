@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Puzzle from "./components/puzzle"
 import { fetchAllData } from "../../utils/api"
 import { randomDataFunc } from '../../helpers'
+import { NUMBER_OF_QUESTIONS } from '../../utils/constants'
 
 const AbilityPuzzle = () => {
 
@@ -22,10 +23,9 @@ const AbilityPuzzle = () => {
 
     function handleStart() {
         setStartPuzzle(!startPuzzle)
-        const randomData = randomDataFunc(allAgents, 9, 22)
+        const randomData = randomDataFunc(allAgents, NUMBER_OF_QUESTIONS, 22)
         setQuestion(randomData)
     }
-
 
     function DifficultyRender() {
         return (
@@ -83,7 +83,7 @@ const AbilityPuzzle = () => {
         <>
             <div className='py-5'>
                 {
-                    startPuzzle ? <Puzzle question={question} selectedDifficultyiOption={selectedDifficultyiOption} /> : (
+                    startPuzzle ? <Puzzle allAgents={allAgents} question={question} selectedDifficultyiOption={selectedDifficultyiOption} /> : (
                         <>
                             <div className='container min-vh-100  d-flex align-items-center justify-content-center'>
                                 <div>
